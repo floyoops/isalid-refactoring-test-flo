@@ -18,14 +18,4 @@ class Quote
         $this->destinationId = $destinationId;
         $this->dateQuoted = $dateQuoted;
     }
-
-    public static function renderHtml(Quote $quote): string
-    {
-        return '<p>' . $quote->id . '</p>';
-    }
-
-    public static function renderText(Quote $quote): string
-    {
-        return (string) $quote->id;
-    }
 }
