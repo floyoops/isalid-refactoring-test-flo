@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once __DIR__ . '/../src/Entity/Destination.php';
 require_once __DIR__ . '/../src/Entity/Quote.php';
 require_once __DIR__ . '/../src/Entity/Site.php';
@@ -13,22 +15,8 @@ require_once __DIR__ . '/../src/Repository/QuoteRepository.php';
 require_once __DIR__ . '/../src/Repository/SiteRepository.php';
 require_once __DIR__ . '/../src/TemplateManager.php';
 
-class TemplateManagerTest extends PHPUnit_Framework_TestCase
+class TemplateManagerTest extends TestCase
 {
-    /**
-     * Init the mocks
-     */
-    public function setUp()
-    {
-    }
-
-    /**
-     * Closes the mocks
-     */
-    public function tearDown()
-    {
-    }
-
     /**
      * @test
      */

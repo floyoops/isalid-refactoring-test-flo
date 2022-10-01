@@ -40,3 +40,14 @@ What do we expect from you:
  - a file / message / email explaining your process and principles you've followed
 
 **Good luck!**
+
+---
+
+# Refacto
+
+## Stack local
+``` bash
+make build-docker
+make dev
+make test
+```
