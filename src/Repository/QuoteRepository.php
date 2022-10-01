@@ -11,12 +11,7 @@ class QuoteRepository implements Repository
 {
     use SingletonTrait;
 
-    /**
-     * @param int $id
-     *
-     * @return Quote
-     */
-    public function getById($id)
+    public function getById(int $id): Quote
     {
         // DO NOT MODIFY THIS METHOD
         $generator = FakerFactory::create();

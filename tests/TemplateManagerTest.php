@@ -16,7 +16,7 @@ class TemplateManagerTest extends TestCase
     /**
      * @test
      */
-    public function test()
+    public function testTemplate(): void
     {
         $faker = FakerFactory::create();
 
@@ -24,7 +24,7 @@ class TemplateManagerTest extends TestCase
         $expectedDestination = DestinationRepository::getInstance()->getById($destinationId);
         $expectedUser        = ApplicationContext::getInstance()->getCurrentUser();
 
-        $quote = new Quote($faker->randomNumber(), $faker->randomNumber(), $destinationId, $faker->date());
+        $quote = new Quote($faker->randomNumber(), $faker->randomNumber(), $destinationId, $faker->dateTime());
 
         $template = new Template(
             1,
@@ -66,7 +66,7 @@ L'équipe de Shipper
         $siteId = $faker->randomNumber();
         $expectedSite = SiteRepository::getInstance()->getById($siteId);
 
-        $quote = new Quote($faker->randomNumber(), $siteId, $faker->randomNumber(), $faker->date());
+        $quote = new Quote($faker->randomNumber(), $siteId, $faker->randomNumber(), $faker->dateTime());
 
         $template = new Template(
             1,
@@ -97,7 +97,7 @@ L'équipe de Shipper
     public function testWithFakeQuote(): void
     {
         $faker = FakerFactory::create();
-        $quote = new Quote($faker->randomNumber(), $faker->randomNumber(), $faker->randomNumber(), $faker->date());
+        $quote = new Quote($faker->randomNumber(), $faker->randomNumber(), $faker->randomNumber(), $faker->dateTime());
 
         $template = new Template(
             1,

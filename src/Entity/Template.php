@@ -4,11 +4,11 @@ namespace App\Entity;
 
 class Template
 {
-    public $id;
-    public $subject;
-    public $content;
+    public int $id;
+    public string $subject;
+    public string $content;
 
-    public function __construct($id, $subject, $content)
+    public function __construct(int $id, string $subject, string $content)
     {
         $this->id = $id;
         $this->subject = $subject;

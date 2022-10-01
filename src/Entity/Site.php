@@ -4,10 +4,10 @@ namespace App\Entity;
 
 class Site
 {
-    public $id;
-    public $url;
+    public int $id;
+    public string $url;
 
-    public function __construct($id, $url)
+    public function __construct(int $id, string $url)
     {
         $this->id = $id;
         $this->url = $url;

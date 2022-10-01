@@ -12,7 +12,7 @@ use App\Repository\SiteRepository;
 
 class TemplateManager
 {
-    public function getTemplateComputed(Template $tpl, array $data)
+    public function getTemplateComputed(Template $tpl, array $data): Template
     {
         if (!$tpl) {
             throw new \RuntimeException('no tpl given');
@@ -25,7 +25,7 @@ class TemplateManager
         return $replaced;
     }
 
-    private function computeText($text, array $data)
+    private function computeText($text, array $data): string
     {
         $APPLICATION_CONTEXT = ApplicationContext::getInstance();
 

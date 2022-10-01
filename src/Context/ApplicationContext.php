@@ -5,33 +5,29 @@ namespace App\Context;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Helper\SingletonTrait;
+use Faker\Factory as FakerFactory;
 
 class ApplicationContext
 {
     use SingletonTrait;
 
-    /**
-     * @var Site
-     */
-    private $currentSite;
-    /**
-     * @var User
-     */
-    private $currentUser;
+    private Site $currentSite;
+
+    private User $currentUser;
 
     protected function __construct()
     {
-        $faker = \Faker\Factory::create();
+        $faker = FakerFactory::create();
         $this->currentSite = new Site($faker->randomNumber(), $faker->url);
         $this->currentUser = new User($faker->randomNumber(), $faker->firstName, $faker->lastName, $faker->email);
     }
 
-    public function getCurrentSite()
+    public function getCurrentSite(): Site
     {
         return $this->currentSite;
     }
 
-    public function getCurrentUser()
+    public function getCurrentUser(): User
     {
         return $this->currentUser;
     }
