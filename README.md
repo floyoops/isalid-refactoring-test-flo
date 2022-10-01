@@ -51,3 +51,18 @@ make build-docker
 make dev
 make test
 ```
+
+## Do
+- refactor with php8. (type).
+- Setting up PSR-4 autoloading with composer.
+- Implementation of the strategy pattern for quotes.
+  - The code is closed at the modification but open at the evolution with injection of strategy quote.
+
+## The next ?
+- implemention of injection dependance with symfony/dependency-injection.
+  - Create services for:
+    - TemplateManager
+    - Repositories
+    - StrategyQuoteRender
+    - QuoteProcess
+  - remove singletonTrait.
