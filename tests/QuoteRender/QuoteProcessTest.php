@@ -9,6 +9,7 @@ use App\QuoteRender\Strategy\DestinationLinkStrategy;
 use App\QuoteRender\Strategy\DestinationNameStrategy;
 use App\QuoteRender\Strategy\SummaryHtmlStrategy;
 use App\QuoteRender\Strategy\SummaryStrategy;
+use App\QuoteRender\Strategy\UserFirstNameStrategy;
 use PHPUnit\Framework\TestCase;
 use Tests\QuoteRender\Strategy\StrategyTestData;
 
@@ -24,6 +25,7 @@ class QuoteProcessTest extends TestCase
             new SummaryHtmlStrategy(),
             new SummaryStrategy(),
             new DestinationNameStrategy(),
+            new UserFirstNameStrategy(),
         ]);
         $text = "
             before ".QuoteValue::DESTINATION_LINK."
@@ -34,14 +36,17 @@ class QuoteProcessTest extends TestCase
             after
         ";
         $quote = StrategyTestData::getQuoteValid();
-        $data = ['quote' => $quote];
+        $user = StrategyTestData::getUserValid();
+
+        $data = ['quote' => $quote, 'user' => $user];
         $text = $quoteProcess->replaceQuote($text, $data);
         self::assertStringContainsString('http', $text);
         self::assertStringContainsString('<p>'.$quote->id.'</p>', $text);
         self::assertStringContainsString('third '.$quote->id, $text);
+        self::assertStringContainsString('fifth '.$user->firstname, $text);
+
         self::assertStringNotContainsString('third '.QuoteValue::SUMMARY, $text);
         self::assertStringNotContainsString('fourth '.QuoteValue::DESTINATION_NAME, $text);
-        self::assertStringContainsString('fifth '.QuoteValue::USER_FIRST_NAME, $text);
     }
 
     public function testProcessorException(): void

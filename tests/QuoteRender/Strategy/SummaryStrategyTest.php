@@ -15,7 +15,7 @@ class SummaryStrategyTest extends TestCase
     {
         $strategy = new SummaryStrategy();
         $text = $strategy->replaceQuote($text, $data);
-        self::assertEquals($text, $textExpected);
+        self::assertEquals($textExpected, $text);
     }
 
     public function provideSummaryStrategy(): array

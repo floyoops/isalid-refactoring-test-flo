@@ -30,7 +30,7 @@ class DestinationNameStrategyTest extends TestCase
         $expectedSite = SiteRepository::getInstance()->getById($quoteValid->siteId);
 
         return [
-            // Data ok but without quote destination_link, return the origin text.
+            // Data ok but without quote destination_name, return the origin text.
             [$templateFake, $dataValid, $templateFake],
             // Quote ok but data empty. -> replace default.
             [$templateValid, [], 'before  after'],
