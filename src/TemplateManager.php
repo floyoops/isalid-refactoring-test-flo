@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteInterface;
 use App\QuoteRender\QuoteProcess;
+use App\QuoteRender\QuoteRenderException;
 use App\QuoteRender\Strategy\DestinationLinkStrategy;
 use App\QuoteRender\Strategy\DestinationNameStrategy;
 use App\QuoteRender\Strategy\SummaryHtmlStrategy;
@@ -17,8 +18,14 @@ use App\QuoteRender\Strategy\UserFirstNameStrategy;
 
 class TemplateManager
 {
+    public const K_QUOTE = 'quote';
+    public const K_USER = 'user';
+
     private readonly QuoteInterface $quoteProcessor;
 
+    /**
+     * @throws QuoteRenderException
+     */
     public function __construct()
     {
         $this->quoteProcessor = new QuoteProcess([
@@ -32,13 +39,9 @@ class TemplateManager
 
     public function getTemplateComputed(Template $tpl, array $data): Template
     {
-        if (!$tpl) {
-            throw new \RuntimeException('no tpl given');
-        }
-
         $APPLICATION_CONTEXT = ApplicationContext::getInstance();
-        $quote = (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
-        $user = (isset($data['user'])  and ($data['user']  instanceof User)) ? $data['user'] : $APPLICATION_CONTEXT->getCurrentUser();
+        $quote = (isset($data[self::K_QUOTE]) and $data[self::K_QUOTE] instanceof Quote) ? $data[self::K_QUOTE] : null;
+        $user = (isset($data[self::K_USER])  and ($data[self::K_USER]  instanceof User)) ? $data[self::K_USER] : $APPLICATION_CONTEXT->getCurrentUser();
         $quoteDto = new QuoteDto($quote, $user);
 
         $replaced = clone($tpl);
