@@ -2,7 +2,6 @@
 
 namespace App\QuoteRender\Strategy;
 
-use App\QuoteRender\QuoteInterface;
 use App\QuoteRender\QuoteValue;
 
 class SummaryHtmlStrategy extends QuoteStrategyAbstract

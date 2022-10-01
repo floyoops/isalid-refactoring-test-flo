@@ -2,7 +2,6 @@
 
 namespace App\QuoteRender\Strategy;
 
-use App\Entity\Quote;
 use App\QuoteRender\QuoteValue;
 
 class SummaryStrategy extends QuoteStrategyAbstract

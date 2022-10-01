@@ -3,7 +3,6 @@
 namespace App\QuoteRender\Strategy;
 
 use App\Entity\Destination;
-use App\Entity\Quote;
 use App\Entity\Site;
 use App\QuoteRender\QuoteValue;
 use App\Repository\DestinationRepository;

@@ -2,7 +2,6 @@
 
 namespace Tests\QuoteRender;
 
-use App\Entity\Quote;
 use App\QuoteRender\QuoteProcess;
 use App\QuoteRender\QuoteRenderException;
 use App\QuoteRender\QuoteValue;

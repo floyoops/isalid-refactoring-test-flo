@@ -2,13 +2,11 @@
 
 namespace Tests\QuoteRender\Strategy;
 
-use App\Entity\Quote;
 use App\QuoteRender\QuoteValue;
 use App\QuoteRender\Strategy\DestinationLinkStrategy;
 use App\Repository\DestinationRepository;
 use App\Repository\SiteRepository;
 use PHPUnit\Framework\TestCase;
-use Faker\Factory as FakerFactory;
 
 class DestinationLinkStrategyTest extends TestCase
 {
