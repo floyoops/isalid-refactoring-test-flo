@@ -4,7 +4,6 @@ namespace App\QuoteRender;
 
 class QuoteProcess implements QuoteInterface
 {
-
     /**
      * @throws QuoteRenderException
      */
@@ -16,8 +15,7 @@ class QuoteProcess implements QuoteInterface
     public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         /** @var QuoteInterface $quotesStrategy */
-        foreach ($this->quotesStrategies as $quotesStrategy)
-        {
+        foreach ($this->quotesStrategies as $quotesStrategy) {
             $text = $quotesStrategy->replaceQuote($text, $quoteDto);
         }
 
@@ -29,7 +27,7 @@ class QuoteProcess implements QuoteInterface
      */
     private function srategiesIsValidOrException(array $quotesStrategies): void
     {
-        $fn = fn($quoteStrategy) => (!$quoteStrategy instanceof QuoteInterface) ? throw new QuoteRenderException('QuoteStrategy does not implement QuoteInterface') : true;
+        $fn = fn ($quoteStrategy) => (!$quoteStrategy instanceof QuoteInterface) ? throw new QuoteRenderException('QuoteStrategy does not implement QuoteInterface') : true;
         array_walk($quotesStrategies, $fn);
     }
 }

@@ -11,9 +11,13 @@ class DestinationNameStrategy extends QuoteStrategyAbstract
     public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         // Return as soon as possible if require not valid.
-        if (!str_contains($text, QuoteValue::DESTINATION_NAME)) return $text;
+        if (!str_contains($text, QuoteValue::DESTINATION_NAME)) {
+            return $text;
+        }
         $quote = $quoteDto->getQuote();
-        if (!$quote?->getDestinationId()) return $this->replaceDefault($text, QuoteValue::DESTINATION_NAME);
+        if (!$quote?->getDestinationId()) {
+            return $this->replaceDefault($text, QuoteValue::DESTINATION_NAME);
+        }
 
         // fetch
         $destinationOfQuote = DestinationRepository::getInstance()->getById($quote->getDestinationId());

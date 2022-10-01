@@ -6,8 +6,10 @@ class Site
 {
     public function __construct(
         private readonly int $id,
-        private readonly string $url)
-    {}
+        private readonly string $url
+    )
+    {
+    }
 
     public function getId(): int
     {

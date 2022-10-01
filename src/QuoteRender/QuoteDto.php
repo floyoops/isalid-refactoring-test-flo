@@ -10,7 +10,8 @@ class QuoteDto
     public function __construct(
         private readonly ?Quote $quote = null,
         private readonly ?User $user = null
-    ){}
+    ) {
+    }
 
     public function getQuote(): ?Quote
     {

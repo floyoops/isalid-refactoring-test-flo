@@ -25,3 +25,8 @@ dev:
 .PHONY: test
 test:
 	$(php) ./vendor/bin/phpunit --testdox tests
+
+.PHONY: php-cs-fixer
+php-cs-fixer:
+	$(php) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src && \
+	$(php) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix tests

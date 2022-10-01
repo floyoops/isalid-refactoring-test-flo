@@ -7,8 +7,10 @@ class Template
     public function __construct(
         private readonly int $id,
         private string $subject,
-        private string $content)
-    {}
+        private string $content
+    )
+    {
+    }
 
     public function getId(): int
     {

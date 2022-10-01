@@ -8,8 +8,10 @@ class User
         private readonly int $id,
         private readonly string $firstname,
         private readonly string $lastname,
-        private readonly string $email)
-    {}
+        private readonly string $email
+    )
+    {
+    }
 
     public function getId(): int
     {

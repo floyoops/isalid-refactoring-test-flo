@@ -38,7 +38,7 @@ class TemplateManager
 
         $APPLICATION_CONTEXT = ApplicationContext::getInstance();
         $quote = (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
-        $user = (isset($data['user'])  and ($data['user']  instanceof User)) ? $data['user']  : $APPLICATION_CONTEXT->getCurrentUser();
+        $user = (isset($data['user'])  and ($data['user']  instanceof User)) ? $data['user'] : $APPLICATION_CONTEXT->getCurrentUser();
         $quoteDto = new QuoteDto($quote, $user);
 
         $replaced = clone($tpl);

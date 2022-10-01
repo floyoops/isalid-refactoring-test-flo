@@ -37,7 +37,8 @@ Merci de nous avoir contacté pour votre livraison à [quote:destination_name].
 Bien cordialement,
 
 L'équipe de Shipper
-");
+"
+        );
         $templateManager = new TemplateManager();
 
         $message = $templateManager->getTemplateComputed(
@@ -84,7 +85,8 @@ Plus d'infos sur la destination: [quote:destination_link]
 Bien cordialement,
 
 L'équipe de Shipper
-");
+"
+        );
         $templateManager = new TemplateManager();
 
         $message = $templateManager->getTemplateComputed(
@@ -118,7 +120,8 @@ quote fake: [quote:fake].
 Bien cordialement,
 
 L'équipe de Shipper
-");
+"
+        );
         $templateManager = new TemplateManager();
         $message = $templateManager->getTemplateComputed($template, ['quote' => $quote]);
         $this->assertIsString('quote fake: [quote:fake].', $message->getContent());

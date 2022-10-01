@@ -14,9 +14,13 @@ class DestinationLinkStrategy extends QuoteStrategyAbstract
     public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         // Return as soon as possible if require not valid.
-        if (!str_contains($text, QuoteValue::DESTINATION_LINK)) return $text;
+        if (!str_contains($text, QuoteValue::DESTINATION_LINK)) {
+            return $text;
+        }
         $quote = $quoteDto->getQuote();
-        if (!$quote?->getDestinationId() && !$quote?->getSiteId()) return $this->replaceDefault($text, QuoteValue::DESTINATION_LINK);
+        if (!$quote?->getDestinationId() && !$quote?->getSiteId()) {
+            return $this->replaceDefault($text, QuoteValue::DESTINATION_LINK);
+        }
 
         // fetch data.
         $site = SiteRepository::getInstance()->getById($quote->getSiteId());

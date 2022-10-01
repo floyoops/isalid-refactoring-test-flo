@@ -10,8 +10,10 @@ class Quote
         private readonly int $id,
         private readonly int $siteId,
         private readonly int $destinationId,
-        private readonly DateTime $dateQuoted)
-    {}
+        private readonly DateTime $dateQuoted
+    )
+    {
+    }
 
     public function getId(): int
     {
