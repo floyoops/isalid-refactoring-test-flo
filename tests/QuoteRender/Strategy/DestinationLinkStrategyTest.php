@@ -24,13 +24,7 @@ class DestinationLinkStrategyTest extends TestCase
 
     public function provideDestinationLinkStrategy(): array
     {
-        $faker = FakerFactory::create();
-        $quoteValid = new Quote(
-            $faker->randomNumber(),
-            $faker->randomNumber(),
-            $faker->randomNumber(),
-            $faker->dateTime
-        );
+        $quoteValid = StrategyTestData::getQuoteValid();
         $dataValid = ['quote' => $quoteValid];
         $templateValid = 'before '.QuoteValue::DESTINATION_LINK.' after';
         $templateFake = 'before [quote::fake] after';
@@ -38,15 +32,12 @@ class DestinationLinkStrategyTest extends TestCase
         $expectedSite = SiteRepository::getInstance()->getById($quoteValid->siteId);
 
         return [
+            // Data ok but without quote destination_link, return the origin text.
+            [$templateFake, $dataValid, $templateFake],
+            // Quote ok but data empty. -> replace default.
+            [$templateValid, [], 'before  after',],
+            // valid.
             [
-                // Data ok but without quote destination_link, return the origin text.
-                $templateFake, $dataValid, $templateFake,
-            ],
-            [   // Quote ok but data empty. -> replace default.
-                $templateValid, [], 'before  after',
-            ],
-            [
-                // valid.
                 $templateValid,
                 $dataValid,
                 'before '.$expectedSite->url.'/'.$expectedDestination->countryName.'/quote/'.$quoteValid->id.' after'

@@ -11,7 +11,6 @@ class QuoteProcess implements QuoteInterface
     public function __construct(private readonly array $quotesStrategies)
     {
         $this->srategiesIsValidOrException($this->quotesStrategies);
-
     }
 
     public function replaceQuote(string $text, array $data): string
