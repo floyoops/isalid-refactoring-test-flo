@@ -3,29 +3,30 @@
 namespace Tests\QuoteRender\Strategy;
 
 use App\QuoteRender\QuoteValue;
-use App\QuoteRender\Strategy\SummaryHtmlStrategy;
+use App\QuoteRender\Strategy\SummaryStrategy;
 use PHPUnit\Framework\TestCase;
 
-class SummaryHtmlStrategyTest extends TestCase
+class SummaryStrategyTest extends TestCase
 {
     /**
-     * @dataProvider provideSummaryHtml
+     * @dataProvider provideSummaryStrategy
      */
-    public function testSummaryHtml(string $text, array $data, string $textExpected): void
+    public function testSummaryStrategy(string $text, array $data, string $textExpected): void
     {
-        $strategy = new SummaryHtmlStrategy();
+        $strategy = new SummaryStrategy();
         $text = $strategy->replaceQuote($text, $data);
         self::assertEquals($text, $textExpected);
     }
 
-    public function provideSummaryHtml(): array
+    public function provideSummaryStrategy(): array
     {
         $quoteValid = StrategyTestData::getQuoteValid();
         $dataValid = ['quote' => $quoteValid];
         $templateFake = 'before [quote::fake] after';
-        $templateValid = 'before '.QuoteValue::SUMMARY_HTML.' after';
+        $templateValid = 'before '.QuoteValue::SUMMARY.' after';
+
         return [
-            // Data ok but without quote summary_html, return the origin text.
+            // Data ok but without quote summary, return the origin text.
             [$templateFake, $dataValid, $templateFake],
             // Quote ok but data empty -> replace default,
             [$templateValid, [], 'before  after'],
@@ -33,7 +34,7 @@ class SummaryHtmlStrategyTest extends TestCase
             [
                 $templateValid,
                 $dataValid,
-                'before <p>'.$quoteValid->id.'</p> after',
+                'before '.$quoteValid->id.' after',
             ]
         ];
     }

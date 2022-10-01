@@ -7,6 +7,7 @@ use App\QuoteRender\QuoteRenderException;
 use App\QuoteRender\QuoteValue;
 use App\QuoteRender\Strategy\DestinationLinkStrategy;
 use App\QuoteRender\Strategy\SummaryHtmlStrategy;
+use App\QuoteRender\Strategy\SummaryStrategy;
 use PHPUnit\Framework\TestCase;
 use Tests\QuoteRender\Strategy\StrategyTestData;
 
@@ -20,12 +21,15 @@ class QuoteProcessTest extends TestCase
         $quoteProcess = new QuoteProcess([
             new DestinationLinkStrategy(),
             new SummaryHtmlStrategy(),
+            new SummaryStrategy(),
         ]);
-        $text = "before ".QuoteValue::DESTINATION_LINK." second ".QuoteValue::SUMMARY_HTML." after";
-        $data = ['quote' => StrategyTestData::getQuoteValid()];
+        $text = "before ".QuoteValue::DESTINATION_LINK." second ".QuoteValue::SUMMARY_HTML." third ".QuoteValue::SUMMARY." after";
+        $quote = StrategyTestData::getQuoteValid();
+        $data = ['quote' => $quote];
         $text = $quoteProcess->replaceQuote($text, $data);
         self::assertStringContainsString('http', $text);
-        self::assertStringContainsString('<p>', $text);
+        self::assertStringContainsString('<p>'.$quote->id.'</p>', $text);
+        self::assertStringContainsString('third '.$quote->id, $text);
     }
 
     public function testProcessorException(): void
