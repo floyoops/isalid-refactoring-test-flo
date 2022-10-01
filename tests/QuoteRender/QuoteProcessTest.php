@@ -2,6 +2,7 @@
 
 namespace Tests\QuoteRender;
 
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteProcess;
 use App\QuoteRender\QuoteRenderException;
 use App\QuoteRender\QuoteValue;
@@ -38,8 +39,7 @@ class QuoteProcessTest extends TestCase
         $quote = StrategyTestData::getQuoteValid();
         $user = StrategyTestData::getUserValid();
 
-        $data = ['quote' => $quote, 'user' => $user];
-        $text = $quoteProcess->replaceQuote($text, $data);
+        $text = $quoteProcess->replaceQuote($text, new QuoteDto($quote, $user));
         self::assertStringContainsString('http', $text);
         self::assertStringContainsString('<p>'.$quote->id.'</p>', $text);
         self::assertStringContainsString('third '.$quote->id, $text);

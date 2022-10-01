@@ -2,6 +2,7 @@
 
 namespace Tests\QuoteRender\Strategy;
 
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteValue;
 use App\QuoteRender\Strategy\DestinationLinkStrategy;
 use App\Repository\DestinationRepository;
@@ -13,7 +14,7 @@ class DestinationLinkStrategyTest extends TestCase
     /**
      * @dataProvider provideDestinationLinkStrategy
      */
-    public function testDestinationLinkStrategy(string $text, array $data, string $textExpected): void
+    public function testDestinationLinkStrategy(string $text, QuoteDto $data, string $textExpected): void
     {
         $strategy = new DestinationLinkStrategy();
         $text = $strategy->replaceQuote($text, $data);
@@ -23,7 +24,7 @@ class DestinationLinkStrategyTest extends TestCase
     public function provideDestinationLinkStrategy(): array
     {
         $quoteValid = StrategyTestData::getQuoteValid();
-        $dataValid = ['quote' => $quoteValid];
+        $dataValid = new QuoteDto(quote: $quoteValid);
         $templateValid = 'before '.QuoteValue::DESTINATION_LINK.' after';
         $templateFake = 'before [quote::fake] after';
         $expectedDestination = DestinationRepository::getInstance()->getById($quoteValid->destinationId);
@@ -33,7 +34,7 @@ class DestinationLinkStrategyTest extends TestCase
             // Data ok but without quote destination_link, return the origin text.
             [$templateFake, $dataValid, $templateFake],
             // Quote ok but data empty. -> replace default.
-            [$templateValid, [], 'before  after',],
+            [$templateValid, new QuoteDto(), 'before  after',],
             // valid.
             [
                 $templateValid,

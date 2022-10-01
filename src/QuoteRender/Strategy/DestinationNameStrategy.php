@@ -2,16 +2,17 @@
 
 namespace App\QuoteRender\Strategy;
 
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteValue;
 use App\Repository\DestinationRepository;
 
 class DestinationNameStrategy extends QuoteStrategyAbstract
 {
-    public function replaceQuote(string $text, array $data): string
+    public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::DESTINATION_NAME)) return $text;
-        $quote = $this->getQuote($data);
+        $quote = $quoteDto->getQuote();
         if (!$quote?->destinationId) return $this->replaceDefault($text, QuoteValue::DESTINATION_NAME);
 
         // fetch

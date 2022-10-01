@@ -13,12 +13,12 @@ class QuoteProcess implements QuoteInterface
         $this->srategiesIsValidOrException($this->quotesStrategies);
     }
 
-    public function replaceQuote(string $text, array $data): string
+    public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         /** @var QuoteInterface $quotesStrategy */
         foreach ($this->quotesStrategies as $quotesStrategy)
         {
-            $text = $quotesStrategy->replaceQuote($text, $data);
+            $text = $quotesStrategy->replaceQuote($text, $quoteDto);
         }
 
         return $text;

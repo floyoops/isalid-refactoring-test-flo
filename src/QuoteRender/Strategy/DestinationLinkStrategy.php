@@ -4,17 +4,18 @@ namespace App\QuoteRender\Strategy;
 
 use App\Entity\Destination;
 use App\Entity\Site;
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteValue;
 use App\Repository\DestinationRepository;
 use App\Repository\SiteRepository;
 
 class DestinationLinkStrategy extends QuoteStrategyAbstract
 {
-    public function replaceQuote(string $text, array $data): string
+    public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::DESTINATION_LINK)) return $text;
-        $quote = $this->getQuote($data);
+        $quote = $quoteDto->getQuote();
         if (!$quote?->destinationId && !$quote?->siteId) return $this->replaceDefault($text, QuoteValue::DESTINATION_LINK);
 
         // fetch data.

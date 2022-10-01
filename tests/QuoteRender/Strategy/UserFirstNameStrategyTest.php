@@ -3,6 +3,7 @@
 namespace Tests\QuoteRender\Strategy;
 
 use App\Context\ApplicationContext;
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteValue;
 use App\QuoteRender\Strategy\UserFirstNameStrategy;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +13,7 @@ class UserFirstNameStrategyTest extends TestCase
     /**
      * @dataProvider provideUserFirstNameStrategy
      */
-    public function testUserFirstNameStrategy(string $text, array $data, string $textExpected): void
+    public function testUserFirstNameStrategy(string $text, QuoteDto $data, string $textExpected): void
     {
         $strategy = new UserFirstNameStrategy();
         $text = $strategy->replaceQuote($text, $data);
@@ -25,12 +26,11 @@ class UserFirstNameStrategyTest extends TestCase
         $templateFake = 'before [user::fake] after';
         $expectedUserAppContext = ApplicationContext::getInstance()->getCurrentUser();
         $expectedUserData = StrategyTestData::getUserValid();
-        $data = ['user' => $expectedUserData];
 
         return [
-            [$templateFake, [], $templateFake],
-            [$templateValid, [], 'before '.$expectedUserAppContext->firstname.' after'],
-            [$templateValid, $data, 'before '.$expectedUserData->firstname.' after'],
+            [$templateFake, new QuoteDto(user: $expectedUserAppContext), $templateFake],
+            [$templateValid, new QuoteDto(user: $expectedUserAppContext), 'before '.$expectedUserAppContext->firstname.' after'],
+            [$templateValid, new QuoteDto(user: $expectedUserData), 'before '.$expectedUserData->firstname.' after'],
         ];
     }
 }

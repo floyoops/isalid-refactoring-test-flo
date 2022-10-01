@@ -2,7 +2,11 @@
 
 namespace App;
 
+use App\Context\ApplicationContext;
+use App\Entity\Quote;
 use App\Entity\Template;
+use App\Entity\User;
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteInterface;
 use App\QuoteRender\QuoteProcess;
 use App\QuoteRender\Strategy\DestinationLinkStrategy;
@@ -32,10 +36,14 @@ class TemplateManager
             throw new \RuntimeException('no tpl given');
         }
 
-        $replaced = clone($tpl);
+        $APPLICATION_CONTEXT = ApplicationContext::getInstance();
+        $quote = (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
+        $user = (isset($data['user'])  and ($data['user']  instanceof User)) ? $data['user']  : $APPLICATION_CONTEXT->getCurrentUser();
+        $quoteDto = new QuoteDto($quote, $user);
 
-        $replaced->subject = $this->quoteProcessor->replaceQuote($replaced->subject, $data);
-        $replaced->content = $this->quoteProcessor->replaceQuote($replaced->content, $data);
+        $replaced = clone($tpl);
+        $replaced->subject = $this->quoteProcessor->replaceQuote($replaced->subject, $quoteDto);
+        $replaced->content = $this->quoteProcessor->replaceQuote($replaced->content, $quoteDto);
 
         return $replaced;
     }

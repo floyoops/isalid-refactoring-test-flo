@@ -2,15 +2,16 @@
 
 namespace App\QuoteRender\Strategy;
 
+use App\QuoteRender\QuoteDto;
 use App\QuoteRender\QuoteValue;
 
 class SummaryHtmlStrategy extends QuoteStrategyAbstract
 {
-    public function replaceQuote(string $text, array $data): string
+    public function replaceQuote(string $text, QuoteDto $quoteDto): string
     {
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::SUMMARY_HTML)) return $text;
-        $quote = $this->getQuote($data);
+        $quote = $quoteDto->getQuote();
         if (!$quote?->id) return $this->replaceDefault($text, QuoteValue::SUMMARY_HTML);
 
         return str_replace(QuoteValue::SUMMARY_HTML, '<p>'.$quote->id.'</p>', $text);
