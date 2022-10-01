@@ -34,7 +34,7 @@ class SummaryHtmlStrategyTest extends TestCase
             [
                 $templateValid,
                 $dataValid,
-                'before <p>'.$quoteValid->id.'</p> after',
+                'before <p>'.$quoteValid->getId().'</p> after',
             ]
         ];
     }

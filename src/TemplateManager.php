@@ -42,8 +42,8 @@ class TemplateManager
         $quoteDto = new QuoteDto($quote, $user);
 
         $replaced = clone($tpl);
-        $replaced->subject = $this->quoteProcessor->replaceQuote($replaced->subject, $quoteDto);
-        $replaced->content = $this->quoteProcessor->replaceQuote($replaced->content, $quoteDto);
+        $replaced->setSubject($this->quoteProcessor->replaceQuote($replaced->getSubject(), $quoteDto));
+        $replaced->setContent($this->quoteProcessor->replaceQuote($replaced->getContent(), $quoteDto));
 
         return $replaced;
     }

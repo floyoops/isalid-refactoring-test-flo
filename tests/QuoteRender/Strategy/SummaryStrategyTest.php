@@ -35,7 +35,7 @@ class SummaryStrategyTest extends TestCase
             [
                 $templateValid,
                 $dataValid,
-                'before '.$quoteValid->id.' after',
+                'before '.$quoteValid->getId().' after',
             ]
         ];
     }

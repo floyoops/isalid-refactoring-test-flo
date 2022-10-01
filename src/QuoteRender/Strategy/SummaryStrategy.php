@@ -12,8 +12,8 @@ class SummaryStrategy extends QuoteStrategyAbstract
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::SUMMARY)) return $text;
         $quote = $quoteDto->getQuote();
-        if (!$quote?->id) return $this->replaceDefault($text, QuoteValue::SUMMARY);
+        if (!$quote?->getId()) return $this->replaceDefault($text, QuoteValue::SUMMARY);
 
-        return str_replace(QuoteValue::SUMMARY, $quote->id, $text);
+        return str_replace(QuoteValue::SUMMARY, $quote->getId(), $text);
     }
 }

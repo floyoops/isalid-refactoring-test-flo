@@ -16,22 +16,22 @@ class DestinationLinkStrategy extends QuoteStrategyAbstract
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::DESTINATION_LINK)) return $text;
         $quote = $quoteDto->getQuote();
-        if (!$quote?->destinationId && !$quote?->siteId) return $this->replaceDefault($text, QuoteValue::DESTINATION_LINK);
+        if (!$quote?->getDestinationId() && !$quote?->getSiteId()) return $this->replaceDefault($text, QuoteValue::DESTINATION_LINK);
 
         // fetch data.
-        $site = SiteRepository::getInstance()->getById($quote->siteId);
-        $destination = DestinationRepository::getInstance()->getById($quote->destinationId);
+        $site = SiteRepository::getInstance()->getById($quote->getSiteId());
+        $destination = DestinationRepository::getInstance()->getById($quote->getDestinationId());
 
         // Replace the quote by the link.
         return str_replace(
             QuoteValue::DESTINATION_LINK,
-            $this->generateDestinationLink($site, $destination, $quote->id),
+            $this->generateDestinationLink($site, $destination, $quote->getId()),
             $text
         );
     }
 
     private function generateDestinationLink(Site $site, Destination $destination, int $quoteId): string
     {
-        return $site->url.'/'.$destination->countryName.'/quote/'.$quoteId;
+        return $site->getUrl().'/'.$destination->getCountryName().'/quote/'.$quoteId;
     }
 }

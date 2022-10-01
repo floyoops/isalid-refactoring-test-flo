@@ -11,9 +11,9 @@ class ApplicationContext
 {
     use SingletonTrait;
 
-    private Site $currentSite;
+    private readonly Site $currentSite;
 
-    private User $currentUser;
+    private readonly User $currentUser;
 
     protected function __construct()
     {

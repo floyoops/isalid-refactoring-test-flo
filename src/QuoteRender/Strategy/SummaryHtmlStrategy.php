@@ -12,8 +12,8 @@ class SummaryHtmlStrategy extends QuoteStrategyAbstract
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::SUMMARY_HTML)) return $text;
         $quote = $quoteDto->getQuote();
-        if (!$quote?->id) return $this->replaceDefault($text, QuoteValue::SUMMARY_HTML);
+        if (!$quote?->getId()) return $this->replaceDefault($text, QuoteValue::SUMMARY_HTML);
 
-        return str_replace(QuoteValue::SUMMARY_HTML, '<p>'.$quote->id.'</p>', $text);
+        return str_replace(QuoteValue::SUMMARY_HTML, '<p>'.$quote->getId().'</p>', $text);
     }
 }

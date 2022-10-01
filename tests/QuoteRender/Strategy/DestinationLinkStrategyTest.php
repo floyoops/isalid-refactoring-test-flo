@@ -27,8 +27,8 @@ class DestinationLinkStrategyTest extends TestCase
         $dataValid = new QuoteDto(quote: $quoteValid);
         $templateValid = 'before '.QuoteValue::DESTINATION_LINK.' after';
         $templateFake = 'before [quote::fake] after';
-        $expectedDestination = DestinationRepository::getInstance()->getById($quoteValid->destinationId);
-        $expectedSite = SiteRepository::getInstance()->getById($quoteValid->siteId);
+        $expectedDestination = DestinationRepository::getInstance()->getById($quoteValid->getDestinationId());
+        $expectedSite = SiteRepository::getInstance()->getById($quoteValid->getSiteId());
 
         return [
             // Data ok but without quote destination_link, return the origin text.
@@ -39,7 +39,7 @@ class DestinationLinkStrategyTest extends TestCase
             [
                 $templateValid,
                 $dataValid,
-                'before '.$expectedSite->url.'/'.$expectedDestination->countryName.'/quote/'.$quoteValid->id.' after'
+                'before '.$expectedSite->getUrl().'/'.$expectedDestination->getCountryName().'/quote/'.$quoteValid->getId().' after'
             ],
         ];
     }

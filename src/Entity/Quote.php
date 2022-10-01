@@ -6,16 +6,30 @@ use DateTime;
 
 class Quote
 {
-    public int $id;
-    public int $siteId;
-    public int $destinationId;
-    public DateTime $dateQuoted;
+    public function __construct(
+        private readonly int $id,
+        private readonly int $siteId,
+        private readonly int $destinationId,
+        private readonly DateTime $dateQuoted)
+    {}
 
-    public function __construct(int $id, int $siteId, int $destinationId, DateTime $dateQuoted)
+    public function getId(): int
     {
-        $this->id = $id;
-        $this->siteId = $siteId;
-        $this->destinationId = $destinationId;
-        $this->dateQuoted = $dateQuoted;
+        return $this->id;
+    }
+
+    public function getSiteId(): int
+    {
+        return $this->siteId;
+    }
+
+    public function getDestinationId(): int
+    {
+        return $this->destinationId;
+    }
+
+    public function getDateQuoted(): DateTime
+    {
+        return $this->dateQuoted;
     }
 }

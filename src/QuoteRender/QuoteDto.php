@@ -7,14 +7,10 @@ use App\Entity\User;
 
 class QuoteDto
 {
-    private ?Quote $quote;
-    private ?User $user;
-
-    public function __construct(?Quote $quote = null, ?User $user = null)
-    {
-        $this->quote = $quote;
-        $this->user = $user;
-    }
+    public function __construct(
+        private readonly ?Quote $quote = null,
+        private readonly ?User $user = null
+    ){}
 
     public function getQuote(): ?Quote
     {

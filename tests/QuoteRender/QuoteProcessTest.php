@@ -41,9 +41,9 @@ class QuoteProcessTest extends TestCase
 
         $text = $quoteProcess->replaceQuote($text, new QuoteDto($quote, $user));
         self::assertStringContainsString('http', $text);
-        self::assertStringContainsString('<p>'.$quote->id.'</p>', $text);
-        self::assertStringContainsString('third '.$quote->id, $text);
-        self::assertStringContainsString('fifth '.$user->firstname, $text);
+        self::assertStringContainsString('<p>'.$quote->getId().'</p>', $text);
+        self::assertStringContainsString('third '.$quote->getId(), $text);
+        self::assertStringContainsString('fifth '.$user->getFirstname(), $text);
 
         self::assertStringNotContainsString('third '.QuoteValue::SUMMARY, $text);
         self::assertStringNotContainsString('fourth '.QuoteValue::DESTINATION_NAME, $text);

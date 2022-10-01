@@ -29,8 +29,8 @@ class UserFirstNameStrategyTest extends TestCase
 
         return [
             [$templateFake, new QuoteDto(user: $expectedUserAppContext), $templateFake],
-            [$templateValid, new QuoteDto(user: $expectedUserAppContext), 'before '.$expectedUserAppContext->firstname.' after'],
-            [$templateValid, new QuoteDto(user: $expectedUserData), 'before '.$expectedUserData->firstname.' after'],
+            [$templateValid, new QuoteDto(user: $expectedUserAppContext), 'before '.$expectedUserAppContext->getFirstname().' after'],
+            [$templateValid, new QuoteDto(user: $expectedUserData), 'before '.$expectedUserData->getFirstname().' after'],
         ];
     }
 }

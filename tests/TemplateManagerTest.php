@@ -47,16 +47,19 @@ L'équipe de Shipper
             ]
         );
 
-        $this->assertEquals('Votre livraison à ' . $expectedDestination->countryName, $message->subject);
+        $this->assertEquals(
+            'Votre livraison à ' . $expectedDestination->getCountryName(),
+            $message->getSubject()
+        );
         $this->assertEquals("
-Bonjour " . $expectedUser->firstname . ",
+Bonjour " . $expectedUser->getFirstname() . ",
 
-Merci de nous avoir contacté pour votre livraison à " . $expectedDestination->countryName . ".
+Merci de nous avoir contacté pour votre livraison à " . $expectedDestination->getCountryName() . ".
 
 Bien cordialement,
 
 L'équipe de Shipper
-", $message->content);
+", $message->getContent());
     }
 
     public function testWithDestinationLink(): void
@@ -91,7 +94,10 @@ L'équipe de Shipper
             ]
         );
 
-        $this->assertStringContainsString("Plus d'infos sur la destination: ". $expectedSite->url, $message->content);
+        $this->assertStringContainsString(
+            "Plus d'infos sur la destination: ". $expectedSite->getUrl(),
+            $message->getContent()
+        );
     }
 
     public function testWithFakeQuote(): void
@@ -115,6 +121,6 @@ L'équipe de Shipper
 ");
         $templateManager = new TemplateManager();
         $message = $templateManager->getTemplateComputed($template, ['quote' => $quote]);
-        $this->assertIsString('quote fake: [quote:fake].', $message->content);
+        $this->assertIsString('quote fake: [quote:fake].', $message->getContent());
     }
 }

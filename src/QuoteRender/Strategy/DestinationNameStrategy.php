@@ -13,11 +13,11 @@ class DestinationNameStrategy extends QuoteStrategyAbstract
         // Return as soon as possible if require not valid.
         if (!str_contains($text, QuoteValue::DESTINATION_NAME)) return $text;
         $quote = $quoteDto->getQuote();
-        if (!$quote?->destinationId) return $this->replaceDefault($text, QuoteValue::DESTINATION_NAME);
+        if (!$quote?->getDestinationId()) return $this->replaceDefault($text, QuoteValue::DESTINATION_NAME);
 
         // fetch
-        $destinationOfQuote = DestinationRepository::getInstance()->getById($quote->destinationId);
+        $destinationOfQuote = DestinationRepository::getInstance()->getById($quote->getDestinationId());
 
-        return str_replace(QuoteValue::DESTINATION_NAME, $destinationOfQuote->countryName, $text);
+        return str_replace(QuoteValue::DESTINATION_NAME, $destinationOfQuote->getCountryName(), $text);
     }
 }

@@ -27,8 +27,8 @@ class DestinationNameStrategyTest extends TestCase
         $dataValid = new QuoteDto(quote: $quoteValid);
         $templateValid = 'before '.QuoteValue::DESTINATION_NAME.' after';
         $templateFake = 'before [quote::fake] after';
-        $expectedDestination = DestinationRepository::getInstance()->getById($quoteValid->destinationId);
-        $expectedSite = SiteRepository::getInstance()->getById($quoteValid->siteId);
+        $expectedDestination = DestinationRepository::getInstance()->getById($quoteValid->getDestinationId());
+        $expectedSite = SiteRepository::getInstance()->getById($quoteValid->getSiteId());
 
         return [
             // Data ok but without quote destination_name, return the origin text.
@@ -39,7 +39,7 @@ class DestinationNameStrategyTest extends TestCase
             [
                 $templateValid,
                 $dataValid,
-                'before '.$expectedDestination->countryName.' after',
+                'before '.$expectedDestination->getCountryName().' after',
             ]
         ];
     }

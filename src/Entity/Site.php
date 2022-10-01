@@ -4,12 +4,18 @@ namespace App\Entity;
 
 class Site
 {
-    public int $id;
-    public string $url;
+    public function __construct(
+        private readonly int $id,
+        private readonly string $url)
+    {}
 
-    public function __construct(int $id, string $url)
+    public function getId(): int
     {
-        $this->id = $id;
-        $this->url = $url;
+        return $this->id;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

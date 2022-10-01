@@ -13,6 +13,6 @@ class UserFirstNameStrategy extends QuoteStrategyAbstract
         if (!str_contains($text, QuoteValue::USER_FIRST_NAME)) return $text;
         $user = $quoteDto->getUser();
 
-        return str_replace(QuoteValue::USER_FIRST_NAME, ucfirst(mb_strtolower($user->firstname)), $text);
+        return str_replace(QuoteValue::USER_FIRST_NAME, ucfirst(mb_strtolower($user->getFirstname())), $text);
     }
 }

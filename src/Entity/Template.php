@@ -4,14 +4,36 @@ namespace App\Entity;
 
 class Template
 {
-    public int $id;
-    public string $subject;
-    public string $content;
+    public function __construct(
+        private readonly int $id,
+        private string $subject,
+        private string $content)
+    {}
 
-    public function __construct(int $id, string $subject, string $content)
+    public function getId(): int
     {
-        $this->id = $id;
+        return $this->id;
+    }
+
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    public function setSubject(string $subject): self
+    {
         $this->subject = $subject;
+        return $this;
+    }
+
+    public function setContent(string $content): self
+    {
         $this->content = $content;
+        return $this;
     }
 }
